@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Vinicius-Madeira/go-web-app/src/configuration/database/mongodb"
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/logger"
 	"github.com/Vinicius-Madeira/go-web-app/src/controller"
 	"github.com/Vinicius-Madeira/go-web-app/src/controller/routes"
@@ -16,6 +17,8 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	mongodb.InitConnection()
 
 	// Init dependencies
 	service := service.NewUserDomainService()
