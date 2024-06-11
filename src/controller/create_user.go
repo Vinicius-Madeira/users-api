@@ -5,7 +5,7 @@ import (
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/validation"
 	"github.com/Vinicius-Madeira/go-web-app/src/controller/model/request"
 	"github.com/Vinicius-Madeira/go-web-app/src/model"
-	"github.com/Vinicius-Madeira/go-web-app/src/model/service"
+	"github.com/Vinicius-Madeira/go-web-app/src/view"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net/http"
@@ -15,8 +15,7 @@ var (
 	UserDomainInterface model.UserDomainInterface
 )
 
-func CreateUser(c *gin.Context) {
-
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
 		zap.String("jorney", "createUser"))
 
@@ -31,8 +30,7 @@ func CreateUser(c *gin.Context) {
 	}
 	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
 
-	service := service.NewUserDomainService()
-	if err := service.CreateUser(domain); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
@@ -40,5 +38,5 @@ func CreateUser(c *gin.Context) {
 	logger.Info("User created successfully",
 		zap.String("jorney", "createUser"))
 
-	c.String(http.StatusCreated, "")
+	c.JSON(http.StatusCreated, view.ConvertDomainToResponse(domain))
 }
