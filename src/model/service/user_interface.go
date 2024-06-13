@@ -3,17 +3,21 @@ package service
 import (
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/rest_err"
 	"github.com/Vinicius-Madeira/go-web-app/src/model"
+	"github.com/Vinicius-Madeira/go-web-app/src/model/repository"
 )
 
-func NewUserDomainService() UserDomainService {
-	return &userDomainService{}
+func NewUserDomainService(userRepository repository.UserRepository) UserDomainService {
+	return &userDomainService{
+		userRepository: userRepository,
+	}
 }
 
 type userDomainService struct {
+	userRepository repository.UserRepository
 }
 
 type UserDomainService interface {
-	CreateUser(domainInterface model.UserDomainInterface) *rest_err.RestError
+	CreateUser(domainInterface model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestError)
 	UpdateUser(string, model.UserDomainInterface) *rest_err.RestError
 	FindUser(string) (*model.UserDomainInterface, *rest_err.RestError)
 	DeleteUser(string) *rest_err.RestError

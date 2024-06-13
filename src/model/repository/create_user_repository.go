@@ -5,6 +5,8 @@ import (
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/logger"
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/rest_err"
 	"github.com/Vinicius-Madeira/go-web-app/src/model"
+	"github.com/Vinicius-Madeira/go-web-app/src/model/repository/entity/converter"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"os"
 )
 
@@ -19,15 +21,13 @@ func (ur *userRepository) CreateUser(
 
 	collection := ur.databaseConnection.Collection(collectionName)
 
-	value, err := userDomain.GetJSONValue()
-	if err != nil {
-		return nil, rest_err.NewInternalServerError(err.Error())
-	}
+	value := converter.ConvertDomainToEntity(userDomain)
+
 	result, err := collection.InsertOne(context.Background(), value)
 	if err != nil {
 		return nil, rest_err.NewInternalServerError(err.Error())
 	}
-	userDomain.SetID(result.InsertedID.(string))
+	value.ID = result.InsertedID.(primitive.ObjectID)
 
-	return userDomain, nil
+	return converter.ConvertEntityToDomain(*value), nil
 }

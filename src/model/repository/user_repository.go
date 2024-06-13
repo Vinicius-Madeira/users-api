@@ -6,9 +6,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func NewUserRepository(database *mongo.Database) *UserRepository {
+func NewUserRepository(database *mongo.Database) UserRepository {
 	return &userRepository{
-		database,
+		databaseConnection: database,
 	}
 }
 
@@ -19,5 +19,5 @@ type userRepository struct {
 type UserRepository interface {
 	CreateUser(
 		UserDomain model.UserDomainInterface,
-	) (model.UserDomainInterface, rest_err.RestError)
+	) (model.UserDomainInterface, *rest_err.RestError)
 }
