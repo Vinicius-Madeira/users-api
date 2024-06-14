@@ -10,6 +10,7 @@ import (
 	"github.com/Vinicius-Madeira/go-web-app/src/model/repository/entity"
 	"github.com/Vinicius-Madeira/go-web-app/src/model/repository/entity/converter"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 	"os"
@@ -52,7 +53,8 @@ func (ur *userRepository) FindUserByID(id string) (model.UserDomainInterface, *r
 
 	userEntity := &entity.UserEntity{}
 
-	filter := bson.D{{Key: "_id", Value: id}}
+	objectID, _ := primitive.ObjectIDFromHex(id)
+	filter := bson.D{{Key: "_id", Value: objectID}}
 	err := collection.FindOne(context.Background(), filter).Decode(userEntity)
 
 	if err != nil {
