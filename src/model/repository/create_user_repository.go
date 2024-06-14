@@ -11,8 +11,6 @@ import (
 	"os"
 )
 
-const mongodbCollection = "MONGODB_COLLECTION_NAME"
-
 func (ur *userRepository) CreateUser(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestError) {

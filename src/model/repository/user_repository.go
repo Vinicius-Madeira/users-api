@@ -6,6 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+const mongodbCollection = "MONGODB_COLLECTION_NAME"
+
 func NewUserRepository(database *mongo.Database) UserRepository {
 	return &userRepository{
 		databaseConnection: database,
@@ -19,5 +21,11 @@ type userRepository struct {
 type UserRepository interface {
 	CreateUser(
 		UserDomain model.UserDomainInterface,
+	) (model.UserDomainInterface, *rest_err.RestError)
+	FindUserByEmail(
+		email string,
+	) (model.UserDomainInterface, *rest_err.RestError)
+	FindUserByID(
+		id string,
 	) (model.UserDomainInterface, *rest_err.RestError)
 }
