@@ -38,5 +38,5 @@ func (uc *userControllerInterface) AuthUser(c *gin.Context) {
 		zap.String("userID", domainResult.GetID()))
 
 	c.Header("Authorization", token)
-	c.JSON(http.StatusCreated, view.ConvertDomainToResponse(domainResult))
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }

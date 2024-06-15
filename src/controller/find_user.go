@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/logger"
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/rest_err"
+	"github.com/Vinicius-Madeira/go-web-app/src/model"
 	"github.com/Vinicius-Madeira/go-web-app/src/view"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -12,7 +14,15 @@ import (
 )
 
 func (uc *userControllerInterface) FindUserById(c *gin.Context) {
-	logger.Info("Init FindUserById controller", zap.String("journey", "findUserByID"))
+	logger.Info("Init FindUserById controller",
+		zap.String("journey", "findUserByID"))
+
+	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
 
 	userID := c.Param("userId")
 	if _, err := primitive.ObjectIDFromHex(userID); err != nil {
@@ -46,6 +56,13 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 
 func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 	logger.Info("Init FindUserByEmail controller", zap.String("journey", "findUserByEmail"))
+
+	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
 
 	userEmail := c.Param("userEmail")
 	if _, err := mail.ParseAddress(userEmail); err != nil {
