@@ -1,0 +1,46 @@
+// Search user in the database by Email
+GET http://localhost:8080/getUserByEmail/viniciussmadeira@gmail.com
+Accept: application/json
+###
+
+// Search user in the database by ID
+GET http://localhost:8080/getUserByEmail/666df2e24b1b55d5b2dd693b
+Accept: application/json
+###
+
+// Create a new user
+POST http://localhost:8080/createUser
+Content-Type: application/json
+
+{
+  "email": "viniciussmadeira@gmail.com",
+  "password": "clancy123*",
+  "name": "Vinicius Santos Madeira",
+  "age": 23
+}
+###
+
+// Updates a user in the database given an ID
+PUT localhost:8080/updateUser/666df2e24b1b55d5b2dd693b
+Content-Type: application/json
+
+{
+  "name": "Vinicius SM",
+  "age": 24
+}
+###
+
+// Deletes a user in the database given an ID
+DELETE localhost:8080/deleteUser/666df2e24b1b55d5b2dd693b
+Accept: application/json
+###
+
+// Authenticates an user through their email and password
+POST localhost:8080/auth
+Content-Type: application/json
+
+{
+  "email": "viniciussmadeira@gmail.com",
+  "password": "clancy123*"
+}
+###

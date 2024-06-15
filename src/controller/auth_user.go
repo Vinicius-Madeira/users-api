@@ -26,7 +26,7 @@ func (uc *userControllerInterface) AuthUser(c *gin.Context) {
 	}
 	domain := model.NewUserAuthDomain(userRequest.Email, userRequest.Password)
 
-	domainResult, err := uc.service.AuthUserServices(domain)
+	domainResult, token, err := uc.service.AuthUserServices(domain)
 	if err != nil {
 		logger.Error("Error trying to call AuthUser service", err, zap.String("journey", "authUser"))
 		c.JSON(err.Code, err)
@@ -37,5 +37,6 @@ func (uc *userControllerInterface) AuthUser(c *gin.Context) {
 		zap.String("journey", "authUser"),
 		zap.String("userID", domainResult.GetID()))
 
+	c.Header("Authorization", token)
 	c.JSON(http.StatusCreated, view.ConvertDomainToResponse(domainResult))
 }

@@ -1,5 +1,7 @@
 package model
 
+import "github.com/Vinicius-Madeira/go-web-app/src/configuration/rest_err"
+
 type UserDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
@@ -8,6 +10,8 @@ type UserDomainInterface interface {
 	GetID() string
 	SetID(string)
 	EncryptPassword()
+
+	GenerateToken() (string, *rest_err.RestError)
 }
 
 func NewUserDomain(
