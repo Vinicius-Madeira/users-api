@@ -28,4 +28,5 @@ type UserRepository interface {
 	FindUserByID(
 		id string,
 	) (model.UserDomainInterface, *rest_err.RestError)
+	UpdateUser(userId string, userDomain model.UserDomainInterface) *rest_err.RestError
 }
