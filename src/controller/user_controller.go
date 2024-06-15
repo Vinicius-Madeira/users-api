@@ -14,6 +14,8 @@ func NewUserControllerInterface(
 }
 
 type UserControllerInterface interface {
+	AuthUser(ctx *gin.Context)
+
 	FindUserById(c *gin.Context)
 	FindUserByEmail(c *gin.Context)
 

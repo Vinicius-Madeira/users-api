@@ -11,30 +11,30 @@ import (
 	"net/http"
 )
 
-func (uc *userControllerInterface) CreateUser(c *gin.Context) {
-	logger.Info("Init CreateUser controller",
-		zap.String("journey", "createUser"))
+func (uc *userControllerInterface) AuthUser(c *gin.Context) {
+	logger.Info("Init AuthUser controller",
+		zap.String("journey", "authUser"))
 
-	var userRequest request.UserRequest
+	var userRequest request.UserAuth
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		logger.Error("Error trying to validate user info", err,
-			zap.String("journey", "createUser"))
+			zap.String("journey", "authUser"))
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
 	}
-	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
+	domain := model.NewUserAuthDomain(userRequest.Email, userRequest.Password)
 
-	domainResult, err := uc.service.CreateUserServices(domain)
+	domainResult, err := uc.service.AuthUserServices(domain)
 	if err != nil {
-		logger.Error("Error trying to call CreateUser service", err, zap.String("journey", "createUser"))
+		logger.Error("Error trying to call AuthUser service", err, zap.String("journey", "authUser"))
 		c.JSON(err.Code, err)
 		return
 	}
 
-	logger.Info("CreateUser controller executed successfully",
-		zap.String("journey", "createUser"),
+	logger.Info("AuthUser controller executed successfully",
+		zap.String("journey", "authUser"),
 		zap.String("userID", domainResult.GetID()))
 
 	c.JSON(http.StatusCreated, view.ConvertDomainToResponse(domainResult))
