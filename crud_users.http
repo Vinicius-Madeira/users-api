@@ -1,13 +1,13 @@
 // Search user in the database by Email
 GET http://localhost:8080/getUserByEmail/viniciussmadeira@gmail.com
 Accept: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJlbWFpbCI6InZpbmljaXVzc21hZGVpcmFAZ21haWwuY29tIiwiZXhwIjoxNzE4NTc0NDc4LCJpZCI6IjY2NmUwYjhkMWRiYmJlMjNkOWNlNGU5NCIsIm5hbWUiOiJWaW5pY2l1cyBTYW50b3MgTWFkZWlyYSJ9.ORF-VxlONtRx6jj7AhKaTOwSd_TSyWTuiTulVUfwSfs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJlbWFpbCI6InZpbmljaXVzc21hZGVpcmFAZ21haWwuY29tIiwiZXhwIjoxNzE4NTc2MDU2LCJpZCI6IjY2NmUwYjhkMWRiYmJlMjNkOWNlNGU5NCIsIm5hbWUiOiJWaW5pY2l1cyBTYW50b3MgTWFkZWlyYSJ9.K_8kZQbYF24qT_LxPhrcWwm3qNgE-ArRN1p-9CH0bck
 ###
 
 // Search user in the database by ID
-GET http://localhost:8080/getUserById/666e0b8d1dbbbe23d9ce4e94
+GET http://localhost:8080/getUserById/666e164a8cb9d983e1d8df3e
 Accept: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJlbWFpbCI6InZpbmljaXVzc21hZGVpcmFAZ21haWwuY29tIiwiZXhwIjoxNzE4NTc0NDc4LCJpZCI6IjY2NmUwYjhkMWRiYmJlMjNkOWNlNGU5NCIsIm5hbWUiOiJWaW5pY2l1cyBTYW50b3MgTWFkZWlyYSJ9.ORF-VxlONtRx6jj7AhKaTOwSd_TSyWTuiTulVUfwSfs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJlbWFpbCI6InZpbmljaXVzc21hZGVpcmFAZ21haWwuY29tIiwiZXhwIjoxNzE4NTc2MDU2LCJpZCI6IjY2NmUwYjhkMWRiYmJlMjNkOWNlNGU5NCIsIm5hbWUiOiJWaW5pY2l1cyBTYW50b3MgTWFkZWlyYSJ9.K_8kZQbYF24qT_LxPhrcWwm3qNgE-ArRN1p-9CH0bck
 ###
 
 // Create a new user
@@ -23,8 +23,9 @@ Content-Type: application/json
 ###
 
 // Updates a user in the database given an ID
-PUT localhost:8080/updateUser/666df2e24b1b55d5b2dd693b
+PUT localhost:8080/updateUser/666e164a8cb9d983e1d8df3e
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJlbWFpbCI6InZpbmljaXVzc21hZGVpcmFAZ21haWwuY29tIiwiZXhwIjoxNzE4NTc2MDU2LCJpZCI6IjY2NmUwYjhkMWRiYmJlMjNkOWNlNGU5NCIsIm5hbWUiOiJWaW5pY2l1cyBTYW50b3MgTWFkZWlyYSJ9.K_8kZQbYF24qT_LxPhrcWwm3qNgE-ArRN1p-9CH0bck
 
 {
   "name": "Vinicius SM",
@@ -33,8 +34,9 @@ Content-Type: application/json
 ###
 
 // Deletes a user in the database given an ID
-DELETE localhost:8080/deleteUser/666e04ddb7c70682325c4e22
+DELETE localhost:8080/deleteUser/666e164a8cb9d983e1d8df3e
 Accept: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJlbWFpbCI6InZpbmljaXVzc21hZGVpcmFAZ21haWwuY29tIiwiZXhwIjoxNzE4NTc2MDU2LCJpZCI6IjY2NmUwYjhkMWRiYmJlMjNkOWNlNGU5NCIsIm5hbWUiOiJWaW5pY2l1cyBTYW50b3MgTWFkZWlyYSJ9.K_8kZQbYF24qT_LxPhrcWwm3qNgE-ArRN1p-9CH0bck
 ###
 
 // Authenticates an user through their email and password
