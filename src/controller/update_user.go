@@ -45,5 +45,5 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 		zap.String("journey", "updateUser"),
 		zap.String("userId", userId))
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }

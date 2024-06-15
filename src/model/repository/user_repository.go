@@ -29,4 +29,5 @@ type UserRepository interface {
 		id string,
 	) (model.UserDomainInterface, *rest_err.RestError)
 	UpdateUser(userId string, userDomain model.UserDomainInterface) *rest_err.RestError
+	DeleteUser(userId string) *rest_err.RestError
 }
