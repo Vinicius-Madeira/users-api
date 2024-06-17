@@ -12,11 +12,8 @@ func (uds *userDomainService) CreateUserServices(userDomain model.UserDomainInte
 	logger.Info("Init createUser model",
 		zap.String("journey", "createUser"))
 
-	_, err := uds.FindUserByEmailServices(userDomain.GetEmail())
-	if err == nil {
-		logger.Error("Email already exists on database",
-			err,
-			zap.String("journey", "createUser"))
+	user, _ := uds.FindUserByEmailServices(userDomain.GetEmail())
+	if user != nil {
 		return nil, rest_err.NewBadRequestError("Email is already being used")
 	}
 
