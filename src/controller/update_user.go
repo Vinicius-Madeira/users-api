@@ -19,6 +19,7 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 
 	var userRequest request.UserUpdateRequest
 
+	// validates the body of the request
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		logger.Error("Error trying to validate user info", err,
 			zap.String("journey", "updateUser"))
@@ -26,10 +27,13 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 		c.JSON(restErr.Code, restErr)
 		return
 	}
+
+	// validates the userId param
 	userId := c.Param("userId")
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
 		restErr := rest_err.NewBadRequestError("Invalid userId, must be a hex value")
 		c.JSON(restErr.Code, restErr)
+		return
 	}
 
 	domain := model.NewUserUpdateDomain(userRequest.Name, userRequest.Age)

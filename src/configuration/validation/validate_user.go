@@ -25,16 +25,16 @@ func init() {
 	}
 }
 
-func ValidateUserError(validation_err error) *rest_err.RestError {
+func ValidateUserError(validationErr error) *rest_err.RestError {
 	var jsonErr *json.UnmarshalTypeError
 	var jsonValidationError validator.ValidationErrors
 
-	if errors.As(validation_err, &jsonErr) {
+	if errors.As(validationErr, &jsonErr) {
 		return rest_err.NewBadRequestError("Invalid field type")
-	} else if errors.As(validation_err, &jsonValidationError) {
+	} else if errors.As(validationErr, &jsonValidationError) {
 		var errorsCauses []rest_err.Cause
 
-		for _, err := range validation_err.(validator.ValidationErrors) {
+		for _, err := range validationErr.(validator.ValidationErrors) {
 			cause := rest_err.Cause{
 				Message: err.Translate(transl),
 				Field:   err.Field(),
