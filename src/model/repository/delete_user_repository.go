@@ -19,12 +19,18 @@ func (ur *userRepository) DeleteUser(userId string) *rest_err.RestError {
 	userIdHex, _ := primitive.ObjectIDFromHex(userId)
 	filter := bson.D{{Key: "_id", Value: userIdHex}}
 
-	_, err := collection.DeleteOne(context.Background(), filter)
+	r, err := collection.DeleteOne(context.Background(), filter)
 	if err != nil {
 		logger.Error("Error trying to delete user from database",
 			err,
 			zap.String("journey", "deleteUser"))
 		return rest_err.NewInternalServerError(err.Error())
+	}
+	if r.DeletedCount == 0 {
+		logger.Error("User not found in database",
+			err,
+			zap.String("journey", "deleteUser"))
+		return rest_err.NewNotFoundError("User not found in database")
 	}
 
 	logger.Info("deleteUser repository executed successfully",

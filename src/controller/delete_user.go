@@ -32,5 +32,5 @@ func (uc *userControllerInterface) DeleteUser(c *gin.Context) {
 		zap.String("journey", "deleteUser"),
 		zap.String("userId", userId))
 
-	c.Status(http.StatusNoContent)
+	c.JSON(http.StatusNoContent, "")
 }
