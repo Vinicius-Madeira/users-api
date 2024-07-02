@@ -76,5 +76,5 @@ func VerifyTokenMiddleware(c *gin.Context) {
 }
 
 func RemoveBearerPrefix(token string) string {
-	return strings.TrimPrefix("Bearer ", token)
+	return strings.TrimPrefix(token, "Bearer ")
 }
