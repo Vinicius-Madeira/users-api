@@ -1,0 +1,27 @@
+version: '3'
+services:
+  go-web-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DATABASE_NAME: users
+      MONGODB_COLLECTION_NAME: users
+      JWT_SECRET_KEY: helloworld
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    networks:
+      - go-web-app_network
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - go-web-app_network
+
+networks:
+  go-web-app_network:
