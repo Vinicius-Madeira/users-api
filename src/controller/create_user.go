@@ -11,6 +11,17 @@ import (
 	"net/http"
 )
 
+// CreateUser Creates a new user
+// @Summary Creates a new user
+// @Description Create a new user with the provided information
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param userRequest body request.UserRequest true "User information for registration"
+// @Success 201 {object} response.UserResponse
+// @Failure 400 {object} rest_err.RestError
+// @Failure 500 {object} rest_err.RestError
+// @Router /createUser [post]
 func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
 		zap.String("journey", "createUser"))

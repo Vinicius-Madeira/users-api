@@ -4,6 +4,9 @@ import (
 	"github.com/Vinicius-Madeira/go-web-app/src/controller"
 	"github.com/Vinicius-Madeira/go-web-app/src/model"
 	"github.com/gin-gonic/gin"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {
@@ -14,4 +17,5 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 	r.PUT("/updateUser/:userId", model.VerifyTokenMiddleware, userController.UpdateUser)             // updates a user
 	r.DELETE("/deleteUser/:userId", model.VerifyTokenMiddleware, userController.DeleteUser)          // deletes a user
 	r.POST("/auth", userController.AuthUser)                                                         // authenticates the user
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }

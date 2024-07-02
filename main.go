@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/Vinicius-Madeira/go-web-app/docs"
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/database/mongodb"
 	"github.com/Vinicius-Madeira/go-web-app/src/configuration/logger"
 	"github.com/Vinicius-Madeira/go-web-app/src/controller/routes"
@@ -10,6 +11,12 @@ import (
 	"log"
 )
 
+// @title Go Web App | Vinicius Madeira
+// @version 1.0
+// @description API for CRUD operations on users
+// @host localhost:8080
+// @BasePath /
+// @schemes http
 func main() {
 	logger.Info("Starting application")
 	err := godotenv.Load()
@@ -22,6 +29,7 @@ func main() {
 	userController, _ := initDependencies(database)
 
 	router := gin.Default()
+	gin.SetMode(gin.ReleaseMode)
 	routes.InitRoutes(&router.RouterGroup, userController)
 
 	if err = router.Run(":8080"); err != nil {

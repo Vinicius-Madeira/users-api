@@ -12,6 +12,19 @@ import (
 	"net/http"
 )
 
+// UpdateUser updates user information with the specified ID.
+// @Summary Update User
+// @Description Updates user details based on the ID provided as a parameter.
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param userId path string true "ID of the user to be updated"
+// @Param userRequest body request.UserUpdateRequest true "User information for update"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
+// @Success 200
+// @Failure 400 {object} rest_err.RestError
+// @Failure 500 {object} rest_err.RestError
+// @Router /updateUser/{userId} [put]
 func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 
 	logger.Info("Init updateUser controller",

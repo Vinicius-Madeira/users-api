@@ -11,6 +11,17 @@ import (
 	"net/http"
 )
 
+// AuthUser allows a user to log in and obtain an authentication token.
+// @Summary User Login
+// @Description Allows a user to log in and receive an authentication token.
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param userLogin body request.UserAuth true "User login credentials"
+// @Success 200 {object} response.UserResponse "Login successful, authentication token provided"
+// @Header 200 {string} Authorization "Authentication token"
+// @Failure 403 {object} rest_err.RestError "Error: Invalid login credentials"
+// @Router /auth [post]
 func (uc *userControllerInterface) AuthUser(c *gin.Context) {
 	logger.Info("Init AuthUser controller",
 		zap.String("journey", "authUser"))
