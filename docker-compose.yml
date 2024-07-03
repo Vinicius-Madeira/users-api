@@ -8,20 +8,20 @@ services:
       MONGODB_URL: mongodb://mongodb:27017
       MONGODB_DATABASE_NAME: users
       MONGODB_COLLECTION_NAME: users
-      JWT_SECRET_KEY: helloworld
+      JWT_SECRET_KEY: jwt_secret
     ports:
       - "8080:8080"
     depends_on:
       - mongodb
     networks:
-      - go-web-app_network
+      - api_network
 
   mongodb:
     image: mongo
     ports:
       - "27017:27017"
     networks:
-      - go-web-app_network
+      - api_network
 
 networks:
-  go-web-app_network:
+  api_network:

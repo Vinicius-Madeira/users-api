@@ -11,7 +11,7 @@ import (
 	"log"
 )
 
-// @title Go Web App | Vinicius Madeira
+// @title Users API | Vinicius Madeira
 // @version 1.0
 // @description API for CRUD operations on users
 // @host localhost:8080

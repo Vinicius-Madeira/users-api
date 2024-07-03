@@ -5,7 +5,7 @@
     "swagger": "2.0",
     "info": {
         "description": "API for CRUD operations on users",
-        "title": "Go Web App | Vinicius Madeira",
+        "title": "Users API | Vinicius Madeira",
         "contact": {},
         "version": "1.0"
     },

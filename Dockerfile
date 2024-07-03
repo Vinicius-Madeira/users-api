@@ -9,13 +9,13 @@ COPY main.go main.go
 
 ENV GO111MODULE=on
 RUN CGO_ENABLED=0 GOOS=LINUX GOARCH=amd64 \
-GOOS=linux go build -o go-web-app
+GOOS=linux go build -o users-api
 
 FROM golang:1.22-alpine3.19 AS runner
-RUN adduser -D goapp
-COPY --from=builder /app/go-web-app /app/go-web-app
-RUN chown -R goapp:goapp /app
-RUN chmod +x /app/go-web-app
+RUN adduser -D api-user
+COPY --from=builder /app/users-api /app/users-api
+RUN chown -R api-user:api-user /app
+RUN chmod +x /app/users-api
 EXPOSE 8080
-USER goapp
-CMD ["/app/go-web-app"]
+USER api-user
+CMD ["/app/users-api"]

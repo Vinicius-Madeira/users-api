@@ -475,7 +475,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8080",
 	BasePath:         "/",
 	Schemes:          []string{"http"},
-	Title:            "Go Web App | Vinicius Madeira",
+	Title:            "Users API | Vinicius Madeira",
 	Description:      "API for CRUD operations on users",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
