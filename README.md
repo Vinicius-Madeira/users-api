@@ -30,35 +30,39 @@ Before getting started, make sure you have the following prerequisites installed
 
 ## Installation
 
-Follow the steps below to install the project in your development environment:
+**Clone the repository:**
 
-1. **Clone the repository:**
-
-   ```
+   ```sh
    git clone https://github.com/Vinicius-Madeira/users-api
-   ```
-
-2. **Navigate to the project directory:**
-
-   ```
-   cd users-api
-   ```
-
-3. **Build and run the application using Docker Compose:**
-
-   ```
-   docker compose up
    ```
 
 ## Running the Application
 
-After installation, you can run the **Users API** with the following command (if you want to run it directly with Golang):
+**Go inside the cloned project:**
 
-```
-docker container run --name users-api-db -p 27017:27017 -d mongo
+   ```sh
+   cd users-api
+   ```
 
-go run main.go
-```
+---
+### You can run the project using either methods below
+
+1. **Running using Docker Compose:**
+
+   ```sh
+   docker compose up
+   ```
+   
+   or
+
+
+2. **Running directly with Golang**
+
+   ```sh
+   docker container run --name users-api-db -p 27017:27017 -d mongo
+
+   go run .
+   ```
 
 The application will be accessible at `http://localhost:8080`.
 
@@ -70,19 +74,19 @@ The **Users API** offers REST endpoints for creating, listing, updating, and del
 
 - **Create a user:**
 
-  ```
+  ```sh
   curl -X POST -H "Content-Type: application/json" -d '{"name": "John", "email": "john@example.com", "age": 30, "password": "password$#@$#323"}' http://localhost:8080/createUser
   ```
 
 - **Update a user:**
 
-  ```
+  ```sh
   curl -X PUT -H "Content-Type: application/json" -d '{"name": "John Brighton"}' http://localhost:8080/updateUser/{userId}
   ```
 
 - **Delete a user:**
 
-  ```
+  ```sh
   curl -X DELETE http://localhost:8080/deleteUser/{userID}
   ```
 
@@ -194,4 +198,4 @@ The API offers the following endpoints:
         - 400: Bad Request (Request error)
         - 500: Internal Server Error (Internal server error)
 
-We hope this Swagger documentation has been helpful in understanding and interacting with the API of the **Users API** project in Go. If you have any questions or need additional support, please don't hesitate to reach out. Enjoy using the API!
+I hope this Swagger documentation has been helpful in understanding and interacting with the **Users API** project in Go. If you have any questions or need additional support, please don't hesitate to reach out. Enjoy using the API!
